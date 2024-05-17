@@ -1,7 +1,6 @@
-def get_db() -> Session:
-    session = SessionLocal()
+from src.city_weather.db_managers.abstract_manager import AbstractDBManager
+from src.city_weather.db_managers.city_manager import CityDBManager
 
-    try:
-        yield session
-    finally:
-        session.close()
+
+def get_city_manager() -> AbstractDBManager:
+    return CityDBManager()

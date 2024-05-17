@@ -2,7 +2,7 @@ from pydantic.v1 import BaseSettings
 
 
 class Settings(BaseSettings):
-    DATABASE_URL: str = "sqlite:///./sql_temperature.db"
+    DATABASE_URL: str = "sqlite+aiosqlite:///./sql_temperature.db"
 
     class Config:
         case_sensitive = True

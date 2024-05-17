@@ -1,9 +1,8 @@
+from typing import Optional
+
 from sqlalchemy import String
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-
-
-class Base(DeclarativeBase):
-    pass
+from sqlalchemy.orm import Mapped, mapped_column
+from src.database import Base
 
 
 class City(Base):
@@ -11,4 +10,4 @@ class City(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(255), nullable=False)
     country: Mapped[str] = mapped_column(String(255), nullable=False)
-    additional_info: Mapped[str]
+    additional_info: Mapped[str] = mapped_column(String(), nullable=True)
