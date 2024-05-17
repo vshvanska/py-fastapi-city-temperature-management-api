@@ -23,7 +23,6 @@ class CityDBManager(AbstractDBManager):
 
     async def update_item(self, data):
         item = await self.get_item_by_id(data.id)
-        await self.validate_item_fields(data)
         data = data.model_dump()
         try:
             async with SessionLocal() as session:
@@ -56,17 +55,6 @@ class CityDBManager(AbstractDBManager):
 
     async def validate_item(self, data):
         await self.check_name_country(data)
-
-        await self.validate_item_fields(data)
-
-    @staticmethod
-    async def validate_item_fields(data):
-
-        if len(data.name) > 255:
-            raise ValidationError(detail="Name too long")
-
-        if len(data.country) > 255:
-            raise ValidationError(detail="Country name too long")
 
     async def check_name_country(self, data):
         async with SessionLocal() as session:
