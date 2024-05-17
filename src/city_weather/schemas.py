@@ -1,26 +1,15 @@
 from pydantic import BaseModel, ConfigDict
-from pydantic.v1 import validator
+from pydantic.v1 import validator, Field
 
 
 class CityBase(BaseModel):
-    name: str
-    country: str
+    name: str = Field(min_length=1, max_length=255)
+    country: str = Field(min_length=1, max_length=255)
     additional_info: str | None = None
 
 
 class CityCreate(CityBase):
-
-    @validator("name")
-    def validate_city_name(cls, name: str):
-        if len(name) > 255:
-            raise ValueError("City's name is too long")
-        return name
-
-    @validator("country")
-    def validate_city_name(cls, country: str):
-        if len(country) > 255:
-            raise ValueError("Country's name is too long")
-        return country
+    pass
 
 
 class City(CityBase):
