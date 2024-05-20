@@ -11,7 +11,7 @@ class AbstractDBManager(ABC):
             return await session.scalars(select(self.model))
 
     @abstractmethod
-    async def update_item(self, data):
+    async def update_item(self, *args, **kwargs):
         pass
 
 
